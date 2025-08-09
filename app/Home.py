@@ -76,3 +76,12 @@ if run_btn:
             "cost_usd": 0.012,
             "duration_s": round(0.4*max_steps, 1)
         })
+    row = {
+    "timestamp": pd.Timestamp.now().isoformat(),
+    "prompt": query,
+    "steps": int(max_steps),
+    "tokens_used": 1234,
+    "cost_usd": 0.012,
+    "status": "success"
+    }
+    log_run(row)
