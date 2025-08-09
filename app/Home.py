@@ -2,6 +2,20 @@ import time
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+from pathlib import Path
+import csv
+
+RUNS_PATH = Path("data/runs.csv")
+
+def log_run(row: dict):
+    RUNS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not RUNS_PATH.exists()
+    with RUNS_PATH.open("a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=row.keys())
+        if write_header:
+            w.writeheader()
+        w.writerow(row)
+
 
 st.set_page_config(page_title="My Agent Dashboard", layout="wide")
 st.title("Agent Control Room")
